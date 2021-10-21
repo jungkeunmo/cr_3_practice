@@ -20,15 +20,33 @@ router.get("/", (req, res) => {
     }
 });
 
-router.post("/create", (req, res) => {
+router.get("/img", (req, res) => {
+    res.render("screens/img");
+});
+
+router.post("/createpost", (req, res) => {
     const insertQuery = `
-        
+        INSERT	INTO img (
+            name,
+            size,
+            createdAt 
+        ) VALUES (
+            "${req.body.name}",
+            "${req.body.size}",
+            now()
+        )
     `;
 
     try {
-        
+        db.query(insertQuery, (error, imgs) => {
+            if(error) {
+                console.log(error);
+            }
+            res.redirect("/");
+        })
     } catch (error) {
-        
+        console.log(error);
+        res.redirect("/")
     }
 });
 

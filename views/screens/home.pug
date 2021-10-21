@@ -1,0 +1,10 @@
+extends ../layout/base.pug
+
+block content 
+    form.create(action="/img", method="get") 
+        button create 
+    each img in imgs
+        div 아름: #{img.name}
+        div 사이즈: #{img.size} 
+        div 작성일: #{img.createdAt} 
+        hr
